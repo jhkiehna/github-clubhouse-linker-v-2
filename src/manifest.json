@@ -1,0 +1,32 @@
+{
+  "name": "Github-Clubhouse Story Linker",
+  "manifest_version": 2,
+  "version": "1.2.6",
+  "description": "Allows you to easily search for Clubhouse stories from Github and link them to pull requests.",
+  "background": {
+    "scripts": ["api.bundle.js"],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_icon": "icon.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://github.com/*",
+        "https://github.com/*/pull*",
+        "https://github.com/*/pull/*",
+        "https://github.com/*/compare/*"
+      ],
+      "js": ["script.bundle.js"],
+      "css": ["script.css"],
+      "match_about_blank": true
+    }
+  ],
+  "icons": {
+    "128": "icon-sm.png"
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "permissions": ["storage", "https://api.clubhouse.io/", "https://github.com/"]
+}
