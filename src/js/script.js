@@ -1,4 +1,4 @@
-import SearchContainer from "./components/searchContainer";
+import SearchContainer from "./modules/searchContainer";
 import linkExistingComments from "./modules/commentLinker";
 import Cache from "./modules/cache";
 
@@ -11,8 +11,9 @@ function inject() {
     targetTextArea &&
     !document.querySelector("#clubhouse-search-container")
   ) {
-    new Cache();
-    new SearchContainer();
+    Cache.new();
+    SearchContainer.new();
+
     linkExistingComments();
 
     targetTextArea.parentNode.insertBefore(

@@ -1,16 +1,31 @@
 export default class Cache {
-  constructor() {
-    const instance = this.constructor.instance;
+  static new() {
+    this.instance = {
+      results: [],
+      search_term: null,
+      selector_position: 0,
+      selected_element: null,
+      error_message: null
+    };
+  }
 
-    if (instance) {
-      return instance;
-    }
+  static get(prop) {
+    if (!this.instance) return;
 
-    this.results = [];
-    this.search_term = null;
-    this.selector_position = 0;
-    this.selected_element = null;
+    return this.instance[prop];
+  }
 
-    this.constructor.instance = this;
+  static set(prop, value) {
+    if (!this.instance) return;
+
+    this.instance[prop] = value;
+
+    return this.instance[prop];
+  }
+
+  static getError() {
+    if (!this.instance) return;
+
+    return this.instance.error_message;
   }
 }
