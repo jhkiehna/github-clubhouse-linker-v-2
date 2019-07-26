@@ -1,5 +1,3 @@
-import Cache from "./cache";
-
 export default function linkExistingComments() {
   let elements = [...document.querySelectorAll("td.js-comment-body p")];
   let regex = /(?<=^\[\w*\s*(ch))\d*\b/g;

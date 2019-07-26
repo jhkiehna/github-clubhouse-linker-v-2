@@ -51,18 +51,6 @@ chrome.runtime.onConnect.addListener(function(port) {
 });
 
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-  // if (request.contentScriptQuery == "searchStories") {
-  //   chrome.storage.sync.get(["clubhouseToken"], item => {
-  //     let CLUBHOUSE_API_TOKEN = item.clubhouseToken;
-
-  //     sendResponse(
-  //       new Promise(finalResolver => {
-  //         getStories(CLUBHOUSE_API_TOKEN, request.searchTerm, finalResolver);
-  //       })
-  //     );
-  //   });
-  // }
-
   if (request.contentScriptQuery == "fetchStory") {
     chrome.storage.sync.get(["clubhouseToken"], item => {
       let CLUBHOUSE_API_TOKEN = item.clubhouseToken;

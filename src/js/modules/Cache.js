@@ -22,10 +22,4 @@ export default class Cache {
 
     return this.instance[prop];
   }
-
-  static getError() {
-    if (!this.instance) return;
-
-    return this.instance.error_message;
-  }
 }
