@@ -2,6 +2,7 @@
   position: relative;
   width: 100%;
   padding-bottom: 0.5em;
+  background: -o-linear-gradient(left, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 40%, rgba(70,52,96,1) 100%);
 }
 
 #search-input-box {
@@ -15,11 +16,29 @@
   background-color: #fafbfc;
 }
 
+@keyframes AnimateGradient {
+  0%{
+    background-size:0% 100%;
+  }
+  100%{
+    background-size:120% 100%;
+  }
+}
+
+.search-loading {
+  background: linear-gradient(to right, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 50%,  rgba(70,52,96,0.5) 99%, rgba(255,255,255,1) 100%);
+  background-repeat: no-repeat;
+
+  animation-name: AnimateGradient;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+}
+
 #search-results-container {
   position: absolute;
   bottom: 4em;
   z-index: 9999;
-  width: 70%;
+  width: 100%;
   min-height: 20px;
   max-height: 300px;
   background-color: #fff;

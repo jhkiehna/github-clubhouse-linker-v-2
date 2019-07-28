@@ -28,8 +28,14 @@ export default class KeyInterface {
         if (results.length > 0 && term === event.target.value) {
           SearchInterface.buildResults((fromCache = true));
         } else {
+          SearchInterface.instance.searchInput.setAttribute(
+            "class",
+            "search-loading"
+          );
+
           Search.do(this.value).then(() => {
             SearchInterface.buildResults();
+            SearchInterface.instance.searchInput.setAttribute("class", "");
           });
         }
       }
