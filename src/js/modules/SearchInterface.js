@@ -25,7 +25,7 @@ export default class SearchInterface {
     this.instance = {
       targetTextArea: targetTextArea,
       container: container,
-      input: searchInput,
+      searchInput: searchInput,
       resultsContainer: null,
       pastedStoryLink: null
     };
@@ -94,7 +94,7 @@ export default class SearchInterface {
     } = SearchInterface.instance;
 
     if (pastedStoryLink) {
-      container.removeChild(pastedStoryLink);
+      container.parentNode.removeChild(pastedStoryLink);
       SearchInterface.instance.pastedStoryLink = null;
     }
 
@@ -127,7 +127,7 @@ export default class SearchInterface {
       )}`;
     }
 
-    container.appendChild(storyLink);
+    container.parentNode.insertBefore(storyLink, container.nextSibling);
     SearchInterface.instance.pastedStoryLink = storyLink;
 
     if (document.querySelector("#partial-new-comment-form-actions button")) {

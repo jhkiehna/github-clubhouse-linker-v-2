@@ -21,6 +21,9 @@ export default class KeyInterface {
 
       if (Cache.get("selected_element")) {
         SearchInterface.pasteResult();
+        Cache.set("selected_element", null);
+        Cache.set("selector_position", 0);
+        SearchInterface.clearResultsContainer();
       } else {
         if (results.length > 0 && term === event.target.value) {
           SearchInterface.buildResults((fromCache = true));
@@ -37,7 +40,7 @@ export default class KeyInterface {
     let selectorPosition = Cache.get("selector_position");
     let previousSelectedElement = Cache.get("selected_element");
     let resultsContainer = SearchInterface.instance.resultsContainer;
-    let totalElements = resultsContainer.length;
+    let totalElements = resultsContainer.children.length;
     resultsContainer.children[selectorPosition].setAttribute(
       "class",
       "search-result"
@@ -45,7 +48,7 @@ export default class KeyInterface {
 
     if (keyCode == 38) {
       if (previousSelectedElement) {
-        Cache.set("selector_position", selectorPosition--);
+        Cache.set("selector_position", selectorPosition - 1);
       }
       if (Cache.get("selector_position") < 0) {
         Cache.set("selector_position", totalElements - 1);
@@ -54,12 +57,14 @@ export default class KeyInterface {
 
     if (keyCode == 40) {
       if (previousSelectedElement) {
-        Cache.set("selector_position", selectorPosition++);
+        Cache.set("selector_position", selectorPosition + 1);
       }
       if (Cache.get("selector_position") > totalElements - 1) {
         Cache.set("selector_position", 0);
       }
     }
+
+    console.log(Cache.get("selector_position"));
 
     let selectedElement =
       resultsContainer.children[Cache.get("selector_position")];
