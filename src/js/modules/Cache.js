@@ -16,10 +16,7 @@ export default class Cache {
   }
 
   static set(prop, value) {
-    console.log(prop, value);
     if (!this.instance) return;
-
-    console.log("after return");
 
     this.instance[prop] = value;
 

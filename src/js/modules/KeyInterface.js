@@ -37,34 +37,28 @@ export default class KeyInterface {
   }
 
   static handleSelect(keyCode) {
-    let selectorPosition = Cache.get("selector_position");
+    const resultsContainer = SearchInterface.instance.resultsContainer;
     let previousSelectedElement = Cache.get("selected_element");
-    let resultsContainer = SearchInterface.instance.resultsContainer;
-    let totalElements = resultsContainer.children.length;
-    resultsContainer.children[selectorPosition].setAttribute(
-      "class",
-      "search-result"
-    );
 
-    if (keyCode == 38) {
-      if (previousSelectedElement) {
-        Cache.set("selector_position", selectorPosition - 1);
+    if (previousSelectedElement) {
+      const totalElements = resultsContainer.children.length;
+      let selectorPosition = Cache.get("selector_position");
+      previousSelectedElement.setAttribute("class", "search-result");
+
+      if (keyCode == 38) {
+        selectorPosition--;
+        Cache.set("selector_position", selectorPosition);
       }
-      if (Cache.get("selector_position") < 0) {
+      if (keyCode == 40) {
+        selectorPosition++;
+        Cache.set("selector_position", selectorPosition);
+      }
+
+      if (selectorPosition < 0)
         Cache.set("selector_position", totalElements - 1);
-      }
-    }
-
-    if (keyCode == 40) {
-      if (previousSelectedElement) {
-        Cache.set("selector_position", selectorPosition + 1);
-      }
-      if (Cache.get("selector_position") > totalElements - 1) {
+      if (selectorPosition > totalElements - 1)
         Cache.set("selector_position", 0);
-      }
     }
-
-    console.log(Cache.get("selector_position"));
 
     let selectedElement =
       resultsContainer.children[Cache.get("selector_position")];
